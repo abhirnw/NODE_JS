@@ -1,4 +1,5 @@
-const { User } = require("../models");
+const Category = require("../models/category.model");
+const User = require("../models/user.model");
 
 /**
  * Create user
@@ -16,9 +17,7 @@ const createUser = async (reqBody) => {
  * @returns {Promise<User>}
  */
 const getUserList = async (filter, options) => {
-  const skip = (Number(options.page || 1) - 1) * Number(options.limit || 10);
-
-  return User.find(filter).skip(skip).limit(options.limit).select("-password");
+  return Category.find()
 };
 
 /**
