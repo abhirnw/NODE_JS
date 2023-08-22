@@ -5,18 +5,20 @@ const { categoryService, userService } = require("../services");
 const createCategory = async (req, res) => {
   try {
     const reqBody = req.body;
-    console.log(reqBody,'===========================');
+    console.log(reqBody.category_name);
 
-    const category = await categoryService.getCategoryById(reqBody);
-    if (!category) {
-      throw new Error("Something went wrong, please try again or later!");
+    const categoryEx = await categoryService.getCategoryByName(reqBody.category_name);
+    if (!categoryEx) {
+      throw new Error("please add other category");
     }
+
+    const category = await categoryService.createCategory(reqBody)
 
     res.status(200).json({
       success: true,
       message: "Category create successfully!",
       data: {
-        // category,
+        category,
       },
     });
   } catch (error) {
@@ -91,9 +93,28 @@ const updateCategory = async (req, res) => {
   }
 };
 
+/** Get Category details by id */
+const getCategoryDetails = async (req, res) => {
+  try {
+    const getDetails = await categoryService.getCategoryById(req.params.categoryId);
+    if (!getDetails) {
+      throw new Error("Category not found!");
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Category details get successfully!",
+      data: getDetails,
+    });
+  } catch (error) {
+    res.status(400).json({ success: false, message: error.message });
+  }
+};
+
 module.exports = {
   createCategory,
   categoryList,
   deleteRecord,
   updateCategory,
+  getCategoryDetails
 };

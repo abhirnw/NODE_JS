@@ -28,6 +28,12 @@ router.put(
   categoryController.updateCategory
 )
 
+/** Get user details by id */
+router.get(
+  "/get-details/:categoryId",
+  categoryController.getCategoryDetails
+);
+
 
 
 module.exports = router;
