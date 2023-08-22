@@ -17,7 +17,7 @@ const createUser = async (reqBody) => {
  * @returns {Promise<User>}
  */
 const getUserList = async (filter, options) => {
-  return Category.find()
+  return User.find()
 };
 
 /**

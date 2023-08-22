@@ -13,9 +13,21 @@ router.post(
 );
 
 /** category list */
-// router.get(
-//   "/list",
-//   categoryController.get
-// )
+router.get(
+  "/list",
+  categoryController.categoryList
+)
+
+router.delete(
+  "/delete/:categoryId",
+  categoryController.deleteRecord
+)
+
+router.put(
+  "/update-category/:categoryId",
+  categoryController.updateCategory
+)
+
+
 
 module.exports = router;
