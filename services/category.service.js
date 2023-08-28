@@ -10,7 +10,7 @@ const createCategory = async (reqBody) => {
 };
 
 const getCategoryList = async (filter, options) => {
-  return Category.find()
+  return Category.find();
 };
 
 const deleteCategory = async (categoryId) => {
@@ -21,9 +21,9 @@ const getCategoryById = async (categoryId) => {
   return Category.findById(categoryId);
 };
 
-const getCategoryByName = async(categoryName) => {
-  return Category.findOne({ categoryName });
-}
+const getCategoryByName = async (category_name) => {
+  return Category.findOne({ category_name });
+};
 
 const updateDetails = async (categoryId, updateBody) => {
   return Category.findByIdAndUpdate(categoryId, { $set: updateBody });
@@ -35,5 +35,5 @@ module.exports = {
   deleteCategory,
   getCategoryById,
   updateDetails,
-  getCategoryByName
+  getCategoryByName,
 };
