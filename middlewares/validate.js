@@ -2,7 +2,6 @@ const Joi = require("joi");
 const pick = require("../helpers/pick");
 
 const validate = (schema) => (req, res, next) => {
-
   const validSchema = pick(schema, ["params", "query", "body"]);
 
   const object = pick(req, Object.keys(validSchema));
@@ -17,7 +16,7 @@ const validate = (schema) => (req, res, next) => {
       .join(", ");
     return next(new Error(errorMessage));
   }
-  console.log(req, value,'req, value');
+
   Object.assign(req, value);
   return next();
 };

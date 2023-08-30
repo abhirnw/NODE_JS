@@ -15,9 +15,10 @@ const auth = () => async (req, res, next) => {
     );
 
     if (!decoded) {
+      return next(new Error("Please enter valid token!"));
     }
-    const user = await User.findOne({ _id: decoded.user });
 
+    const user = await User.findOne({ _id: decoded.user });
     if (!user) {
       return next(new Error("Please authenticate!"));
     }

@@ -26,8 +26,8 @@ app.use(bodyParser.json());
 app.use(cors());
 app.options("*", cors());
 
-/** upload image */
-// app.use(express.static(`./public`));
+/** Get image */
+app.use(express.static(`./public`));
 
 app.use("/v1", routes);
 
