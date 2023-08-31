@@ -12,13 +12,13 @@ const CronJob = require("cron").CronJob;
 // ).start();
 
 /** It's running on when clock time is 7:45 of 24 hours */
-// new CronJob(
-//   "45 7 * * *",
-//   function () {
-//     console.log("It's running on when clock time is 7:45");
-//   },
-//   null,
-//   false,
-//   //   "America/Sao_Paulo"
-//   "Asia/Kolkata"
-// ).start();
+new CronJob(
+  "45 7 * * *",
+  function () {
+    console.log("It's running on when clock time is 7:45");
+  },
+  null,
+  false,
+  //   "America/Sao_Paulo"
+  "Asia/Kolkata"
+).start();

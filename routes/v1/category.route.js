@@ -2,6 +2,7 @@ const express = require("express");
 const { categoryValidation } = require("../../validations");
 const { categoryController } = require("../../controllers");
 const validate = require("../../middlewares/validate");
+const auth = require("../../middlewares/auth")
 
 const router = express.Router();
 
@@ -9,12 +10,14 @@ const router = express.Router();
 router.post(
   "/create-category",
   validate(categoryValidation.createCategory),
+  auth(),
   categoryController.createCategory
 );
 
 /** category list */
 router.get(
   "/list",
+  auth(),
   categoryController.categoryList
 )
 
