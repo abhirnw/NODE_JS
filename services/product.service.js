@@ -20,7 +20,11 @@ const getProductById = async (productId) => {
  */
 const getProductList = async (filter, options) => {
   const skip = Number((options.page || 1) - 1) * Number(options.limit || 10);
-  return Product.find(filter).limit(Number(options.limit)).skip(Number(skip));
+  return Product.find(filter)
+    .limit(Number(options.limit))
+    .skip(Number(skip))
+    .populate("category")
+    .populate("sub_category");
 };
 
 /**

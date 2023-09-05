@@ -8,6 +8,7 @@ const createProduct = {
     product_image: Joi.string().allow(""),
     price: Joi.number().required(),
     category: Joi.string().required(),
+    sub_category: Joi.string().required(),
   }),
 };
 

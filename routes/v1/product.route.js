@@ -10,7 +10,7 @@ const router = express.Router();
 /** Create product */
 router.post(
   "/create",
-  auth(),
+  // auth(),
   upload.single("product_image"),
   validate(productValidation.createProduct),
   productController.createProduct
