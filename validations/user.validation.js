@@ -7,7 +7,7 @@ const createUser = {
     last_name: Joi.string().required().trim(),
     email: Joi.string().required().trim(),
     password: Joi.string().required().trim(),
-    address: Joi.string().required().trim()
+    address: Joi.string().required().trim(),
   }),
 };
 
@@ -16,8 +16,8 @@ const getUserList = {
   query: Joi.object().keys({
     search: Joi.string().trim().allow(""),
     sortBy: Joi.string().trim().allow(""),
-    limit: Joi.number().integer().allow(""),
-    page: Joi.number().integer().allow(""),
+    limit: Joi.number().integer().allow("").default(10),
+    page: Joi.number().integer().allow("").default(1),
   }),
 };
 

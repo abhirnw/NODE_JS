@@ -1,4 +1,4 @@
-const { Category } = require("../models");
+const { Category, Product } = require("../models");
 
 /**
  * Create user
@@ -14,6 +14,13 @@ const getCategoryList = async (filter, options) => {
 };
 
 const deleteCategory = async (categoryId) => {
+  const usedCategoryInProduct = await Product.findOne({ category: categoryId });
+  if (usedCategoryInProduct) {
+    throw new Error(
+      "This category used in product so you can not delete this category."
+    );
+  }
+
   return Category.findByIdAndDelete(categoryId);
 };
 

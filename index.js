@@ -26,8 +26,8 @@ app.use(bodyParser.json());
 app.use(cors());
 app.options("*", cors());
 
-/** upload image */
-// app.use(express.static(`./public`));
+/** Get image */
+app.use(express.static(`./public`));
 
 app.use("/v1", routes);
 
@@ -36,8 +36,10 @@ app.use((req, res, next) => {
   next(new Error("Route not found!"));
 });
 
+app.use(express.static("./public"));
+
 /** Database connection */
-connectDB()
+connectDB();
 
 /** create server using http */
 const server = http.createServer(app);
