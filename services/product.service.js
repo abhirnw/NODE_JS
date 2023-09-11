@@ -24,7 +24,7 @@ const getProductList = async (filter, options) => {
     .limit(Number(options.limit))
     .skip(Number(skip))
     .populate("category")
-    .populate("sub_category");
+    .populate("sub_category")
 };
 
 /**

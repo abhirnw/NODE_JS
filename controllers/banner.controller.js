@@ -1,23 +1,23 @@
 const fs = require("fs");
-const { productService } = require("../services");
+const { bannerService } = require("../services");
 
-/** Create product */
-const createProduct = async (req, res) => {
+/** Create Banner */
+const createBanner = async (req, res) => {
   try {
     const reqBody = req.body;
 
     if (req.file) {
       reqBody.product_image = req.file.filename;
     } else {
-      throw new Error("Product image is required!");
+      throw new Error("Banner image is required!");
     }
 
-    const createdProduct = await productService.createProduct(reqBody);
+    const createdBanner = await bannerService.createBanner(reqBody);
 
     res.status(200).json({
       success: true,
-      message: "Product create successfully!",
-      data: createdProduct,
+      message: "Banner create successfully!",
+      data: createdBanner,
     });
   } catch (error) {
     res.status(error?.statusCode || 400).json({
@@ -28,7 +28,7 @@ const createProduct = async (req, res) => {
   }
 };
 
-/** Get product details */
+/** Get Banner details */
 const getDetails = async (req, res) => {
   try {
     const productExists = await productService.getProductById(
@@ -52,17 +52,10 @@ const getDetails = async (req, res) => {
   }
 };
 
-/** Get prooduct list */
-const getProductList = async (req, res) => {
+/** Get Banner list */
+const getBannerList = async (req, res) => {
   try {
-    const { search, ...options } = req.query;
-    let filter = {};
-
-    if (search) {
-      filter.product_name = { $regex: search, $options: "i" };
-    }
-
-    const getList = await productService.getProductList(filter, options);
+    const getList = await bannerService.getList();
 
     res.status(200).json({
       success: true,
@@ -77,7 +70,7 @@ const getProductList = async (req, res) => {
   }
 };
 
-/** Update product details */
+/** Update Banner details */
 const updateProduct = async (req, res) => {
   try {
     const reqBody = req.body;
@@ -120,7 +113,7 @@ const updateProduct = async (req, res) => {
   }
 };
 
-/** Manage product status */
+/** Manage Banner status */
 const manageProductStatus = async (req, res) => {
   try {
     const manageStatus = await productService.manageProductStatus(
@@ -145,7 +138,7 @@ const manageProductStatus = async (req, res) => {
   }
 };
 
-/** Delete product */
+/** Delete Banner */
 const deleteProduct = async (req, res) => {
   try {
     const productId = req.params.productId;
@@ -179,9 +172,9 @@ const deleteProduct = async (req, res) => {
 };
 
 module.exports = {
-  createProduct,
+  createBanner,
   getDetails,
-  getProductList,
+  getBannerList,
   updateProduct,
   manageProductStatus,
   deleteProduct,

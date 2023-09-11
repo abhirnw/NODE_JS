@@ -1,6 +1,6 @@
 const express = require("express");
 const { categoryValidation } = require("../../validations");
-const { subCategoryController } = require("../../controllers");
+const { subCategoryController, categoryController } = require("../../controllers");
 const validate = require("../../middlewares/validate");
 const auth = require("../../middlewares/auth");
 
@@ -11,11 +11,11 @@ router.post(
   "/create-category",
   validate(categoryValidation.createCategory),
   auth(),
-  subCategoryController.createSubCategory
+  categoryController.createCategory
 );
 
 /** category list */
-router.get("/list", auth(), subCategoryController.subCategoryList);
+/* --- router.get("/list", auth(), subCategoryController.subCategoryList); -- */
 
 // router.delete("/delete/:categoryId", categoryController.deleteRecord);
 

@@ -4,7 +4,7 @@ const { categoryService, userService } = require("../services");
 /** create category */
 const createCategory = async (req, res) => {
   try {
-    const reqBody = req.body;
+  const reqBody = req.body;
 
     const categoryEx = await categoryService.getCategoryByName(reqBody.category_name);
     if (categoryEx) {

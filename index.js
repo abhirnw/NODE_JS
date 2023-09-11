@@ -14,7 +14,7 @@ const app = express();
  * form-data is use for image upload
  * parse application/x-www-form-urlencoded
  */
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 /**
  * allow json data from body
@@ -45,5 +45,5 @@ connectDB();
 const server = http.createServer(app);
 
 server.listen(config.port, () => {
-  console.log("server listning port number 3000!");
+  console.log("server listning port number "+ config.port);
 });

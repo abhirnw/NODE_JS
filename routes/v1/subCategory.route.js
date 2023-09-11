@@ -10,7 +10,7 @@ const router = express.Router();
 router.post(
   "/create-subCategory",
   validate(subCategoryValidation.createSubCategory),
-  //   auth(),
+    auth(),
   subCategoryController.createSubCategory
 );
 
