@@ -1,4 +1,7 @@
 const CronJob = require("cron").CronJob;
+const { start } = require("repl");
+const config = require("../config/config");
+const { emailService } = require("../services");
 
 /** It's running on every 3 seconds. */
 // new CronJob(
@@ -20,5 +23,20 @@ new CronJob(
   null,
   false,
   //   "America/Sao_Paulo"
+  "Asia/Kolkata"
+).start();
+
+/** Send email */
+new CronJob(
+  "50 7 * * *",
+  function () {
+    emailService.sendMail(
+      "Abhirnw@gmail.com",
+      "Morning message",
+      "Good morning Abhi! Have a nice day :)"
+    );
+  },
+  null,
+  false,
   "Asia/Kolkata"
 ).start();

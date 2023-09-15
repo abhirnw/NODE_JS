@@ -1,7 +1,7 @@
 const Joi = require("joi");
 const dotenv = require("dotenv");
 
-dotenv.config({ path: "./.env"});
+dotenv.config({ path: "./.env" });
 
 const envVarsSchema = Joi.object({
   PORT: Joi.number().default(3000),
@@ -25,6 +25,7 @@ const { value: envVars, error } = envVarsSchema
 
 if (error) {
   console.log("Config Error: ", error);
+  process.exit(1);
 }
 
 module.exports = {

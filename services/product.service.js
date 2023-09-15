@@ -1,3 +1,4 @@
+const { default: mongoose } = require("mongoose");
 const { Product } = require("../models");
 
 /**
@@ -13,6 +14,63 @@ const getProductById = async (productId) => {
 };
 
 /**
+ * Get product details using aggregation
+ * @param {ObjectId} productId
+ * @returns {Promise<Product>}
+ */
+const getProductDetails = async (productId) => {
+  return Product.aggregate([
+    {
+      $match: { _id: new mongoose.Types.ObjectId(productId) },
+    },
+    {
+      $lookup: {
+        from: "categories",
+        localField: "category",
+        foreignField: "_id",
+        pipeline: [
+          {
+            $lookup: {
+              from: "sub_categories",
+              localField: "_id",
+              foreignField: "category",
+              as: "sub_category",
+            },
+          },
+          {
+            $unwind: {
+              path: "$sub_category",
+              preserveNullAndEmptyArrays: true,
+            },
+          },
+        ],
+        as: "category",
+      },
+    },
+    {
+      $unwind: {
+        path: "$category",
+        preserveNullAndEmptyArrays: true,
+      },
+    },
+    {
+      $lookup: {
+        from: "sub_categories",
+        localField: "sub_category",
+        foreignField: "_id",
+        as: "sub_category",
+      },
+    },
+    {
+      $unwind: {
+        path: "$sub_category",
+        preserveNullAndEmptyArrays: true,
+      },
+    },
+  ]);
+};
+
+/**
  * Get product list
  * @param {object} filter
  * @param {object} options
@@ -24,7 +82,7 @@ const getProductList = async (filter, options) => {
     .limit(Number(options.limit))
     .skip(Number(skip))
     .populate("category")
-    .populate("sub_category")
+    .populate("sub_category");
 };
 
 /**
@@ -83,6 +141,7 @@ const deleteProduct = async (productId) => {
 
 module.exports = {
   getProductById,
+  getProductDetails,
   getProductList,
   createProduct,
   updateProduct,

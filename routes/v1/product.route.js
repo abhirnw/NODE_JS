@@ -23,6 +23,13 @@ router.get(
   productController.getDetails
 );
 
+/** Get details using aggrgation */
+router.get(
+  "/details-agg/:productId",
+  validate(productValidation.getDetails),
+  productController.getDetailsByAggegation
+);
+
 /** Get production list */
 router.get(
   "/list",

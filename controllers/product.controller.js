@@ -52,6 +52,30 @@ const getDetails = async (req, res) => {
   }
 };
 
+/** Get details using aggrgation */
+const getDetailsByAggegation = async (req, res) => {
+  try {
+    const productDetails = await productService.getProductDetails(
+      req.params.productId
+    );
+    if (!productDetails.length) {
+      throw new Error("Product not found!");
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Product details get successfully!",
+      data: productDetails[0],
+    });
+  } catch (error) {
+    res.status(error?.statusCode || 400).json({
+      success: false,
+      message:
+        error?.message || "Something went wrong, please try again or later!",
+    });
+  }
+};
+
 /** Get prooduct list */
 const getProductList = async (req, res) => {
   try {
@@ -181,6 +205,7 @@ const deleteProduct = async (req, res) => {
 module.exports = {
   createProduct,
   getDetails,
+  getDetailsByAggegation,
   getProductList,
   updateProduct,
   manageProductStatus,
