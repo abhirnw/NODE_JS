@@ -17,7 +17,7 @@ const createUser = async (reqBody) => {
  * @returns {Promise<User>}
  */
 const getUserList = async (filter, options) => {
-  return User.find()
+  return User.find();
 };
 
 /**
@@ -57,6 +57,10 @@ const deleteUser = async (userId) => {
   return User.findByIdAndDelete(userId);
 };
 
+const deleteUserByEmail = async (email) => {
+  return User.findOneAndDelete({ email: email });
+};
+
 module.exports = {
   createUser,
   getUserList,
@@ -64,4 +68,5 @@ module.exports = {
   updateDetails,
   getUserByEmail,
   deleteUser,
+  deleteUserByEmail,
 };

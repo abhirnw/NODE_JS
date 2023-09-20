@@ -11,13 +11,13 @@ let transport = nodemailer.createTransport({
 });
 
 /** Send mail */
-const sendMail = async (to, subject, text) => {
+const sendMail = async (to, data, subject) => {
   try {
     return transport.sendMail({
       from: config.email.from,
       to,
       subject,
-      text,
+      html: data,
     });
   } catch (error) {
     return false;
