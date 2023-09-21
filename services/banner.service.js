@@ -5,11 +5,8 @@ const { Banner } = require("../models");
  * @param {ObjectId} productId
  * @returns {Promise<Product>}
  */
-const getBannerById = async (productId) => {
-  return Banner.findOne({ _id: productId }).populate({
-    path: "category",
-    select: ["category_name"],
-  });
+const getBannerById = async (bannerId) => {
+  return Banner.findOne({ _id: bannerId });
 };
 
 /**
@@ -19,7 +16,7 @@ const getBannerById = async (productId) => {
  * @returns {Promise<Product>}
  */
 const getList = async () => {
-  return Banner.find().populate("product")
+  return Banner.find().populate("product");
 };
 
 /**
@@ -77,10 +74,10 @@ const deleteBanner = async (productId) => {
 };
 
 module.exports = {
-    getBannerById,
-    getList,
-    createBanner,
-    updateBanner,
-    manageBannerStatus,
-    deleteBanner,
+  getBannerById,
+  getList,
+  createBanner,
+  updateBanner,
+  manageBannerStatus,
+  deleteBanner,
 };

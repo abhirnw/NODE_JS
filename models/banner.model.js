@@ -11,8 +11,12 @@ const bannerSchema = mongoose.Schema(
       type: String,
       trim: true,
     },
-    banner_image: {
+    product_image: {
       type: String,
+      trim: true,
+    },
+    banner_image: {
+      type: Array,
       trim: true,
     },
     product: {
@@ -29,8 +33,14 @@ const bannerSchema = mongoose.Schema(
     versionKey: false,
     toJSON: {
       transform: function (doc, data) {
-        if (data?.banner_image) {
-          data.banner_image = `${config.base_url}banner_images/${data.banner_image}`;
+        if (data?.product_image) {
+          data.product_image = `${config.base_url}product_images/${data.product_image}`;
+        }
+
+        if (Array.isArray(data.banner_image)) {
+          data.banner_image = data.banner_image.map(
+            (banner_image) => `${config.base_url}product_images/${banner_image}`
+          );
         }
       },
     },

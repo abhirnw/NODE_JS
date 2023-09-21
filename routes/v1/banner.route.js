@@ -16,6 +16,23 @@ router.post(
   bannerController.createBanner
 );
 
+/** Create product and multiple image upload */
+router.post(
+  "/multiple-banners",
+  // auth(),
+  upload.array("banner_image"),
+  validate(bannerValidation.multipleBanner),
+  bannerController.multipleBanner
+);
+
+/** Delete product and multiple image upload */
+router.delete(
+  "/delete/:bannerId",
+  // auth(),
+  validate(bannerValidation.getBannerDetails),
+  bannerController.deleteBanner
+);
+
 /** Get product details */
 // router.get(
 //   "/details/:productId",

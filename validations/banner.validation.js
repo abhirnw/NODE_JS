@@ -10,10 +10,27 @@ const createBanner = {
   }),
 };
 
+/** Create Banner */
+const multipleBanner = {
+  body: Joi.object({
+    banner_name: Joi.string().required().trim(),
+    banner_description: Joi.string().optional(),
+    banner_image: Joi.array().allow(""),
+    product: Joi.string().required(),
+  }),
+};
+
 /** Get Banner details */
 const getDetails = {
   params: Joi.object({
     productId: Joi.string().required().trim(),
+  }),
+};
+
+/** Get product details */
+const getBannerDetails = {
+  params: Joi.object({
+    bannerId: Joi.string().required().trim(),
   }),
 };
 
@@ -42,7 +59,9 @@ const updateBanner = {
 
 module.exports = {
   createBanner,
+  multipleBanner,
   getDetails,
+  getBannerDetails,
   getList,
   updateBanner,
 };
