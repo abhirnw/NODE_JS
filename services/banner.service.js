@@ -19,7 +19,7 @@ const getBannerById = async (productId) => {
  * @returns {Promise<Product>}
  */
 const getList = async () => {
-  return Banner.find().populate("product")
+  return Banner.find().populate("product").count()
 };
 
 /**

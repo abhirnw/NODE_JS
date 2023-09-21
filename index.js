@@ -36,7 +36,6 @@ app.use((req, res, next) => {
   next(new Error("Route not found!"));
 });
 
-app.use(express.static("./public"));
 
 /** Database connection */
 connectDB();

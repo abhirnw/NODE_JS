@@ -111,11 +111,13 @@ const deleteUser = async (req, res) => {
 const sendMail = async (req, res) => {
   try {
     const reqBody = req.body;
+    console.log('get req body');
     const sendEmail = await emailService.sendMail(
       reqBody.email,
       reqBody.subject,
       reqBody.text
-    );
+      );
+      console.log('Send Done..');
     if (!sendEmail) {
       throw new Error("Something went wrong, please try again or later.");
     }
