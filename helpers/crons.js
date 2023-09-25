@@ -1,7 +1,8 @@
 const CronJob = require("cron").CronJob;
 const { start } = require("repl");
 const config = require("../config/config");
-const { emailService } = require("../services");
+const { emailService, userService } = require("../services");
+const { User } = require("../models");
 
 /** It's running on every 3 seconds. */
 // new CronJob(
@@ -13,6 +14,16 @@ const { emailService } = require("../services");
 //   false,
 //   "Asia/Kolkata"
 // ).start();
+
+const user = userService.getUserList();
+
+// var user;
+// (async () => {
+//   user = await User.find().select("email");
+//   console.log("=====user====11=", user);
+// })();
+
+// console.log("=====user=====", user);
 
 /** It's running on when clock time is 7:45 of 24 hours */
 new CronJob(
@@ -28,10 +39,32 @@ new CronJob(
 
 /** Send email */
 new CronJob(
-  "50 7 * * *",
+  "15 14 * * *",
   function () {
     emailService.sendMail(
       "Abhirnw@gmail.com",
+      "Morning message",
+      "Good morning Abhi! Have a nice day :)"
+    );
+  },
+  null,
+  false,
+  "Asia/Kolkata"
+).start();
+
+/** Multiple send email */
+new CronJob(
+  "19 14 * * *",
+  async () => {
+    const userDetails = await userService.getUserList();
+
+    const userEmails = [];
+    for (let ele of userDetails) {
+      userEmails.push(ele.email);
+    }
+
+    await emailService.sendMail(
+      userEmails,
       "Morning message",
       "Good morning Abhi! Have a nice day :)"
     );
