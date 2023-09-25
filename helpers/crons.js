@@ -15,16 +15,6 @@ const { User } = require("../models");
 //   "Asia/Kolkata"
 // ).start();
 
-const user = userService.getUserList();
-
-// var user;
-// (async () => {
-//   user = await User.find().select("email");
-//   console.log("=====user====11=", user);
-// })();
-
-// console.log("=====user=====", user);
-
 /** It's running on when clock time is 7:45 of 24 hours */
 new CronJob(
   "45 7 * * *",
