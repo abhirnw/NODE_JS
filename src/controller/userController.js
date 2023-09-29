@@ -76,9 +76,10 @@ const login = async (req, res) => {
 
 const getAllUser = async (req, res) => {
   try {
-    await auth(req.headers.token, ["user",'admin']);
+    console.log(req.headers.token,'');
+    await auth(req.headers.token, ['admin']);
 
-    const data = await userService.getAllUser({ role: "user" });
+    const data = await userService.getAllUser({ role: "admin" });
     res.status(200).json({ data });
   } catch (error) {
     res.status(404).json({ error: error.message });
