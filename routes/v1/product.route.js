@@ -12,7 +12,7 @@ router.post(
   "/create",
   auth(),
   upload.single("product_image"),
-  validate(productValidation.createProduct),
+  // validate(productValidation.createProduct),
   productController.createProduct
 );
 

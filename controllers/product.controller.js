@@ -1,10 +1,24 @@
 const fs = require("fs");
 const { productService } = require("../services");
+const destructureValidate = require("../middlewares/destructure");
+const { productValidation, destructureValidation } = require("../validations");
 
 /** Create product */
 const createProduct = async (req, res) => {
   try {
     const reqBody = req.body;
+
+    const { error: validationError } = destructureValidate(
+      reqBody,
+      destructureValidation.createProduct
+    ); // Data validation.
+
+    if (validationError) {
+      return res.status(404).json({
+        success: false,
+        message: validationError,
+      });
+    }
 
     if (req.file) {
       reqBody.product_image = req.file.filename;
